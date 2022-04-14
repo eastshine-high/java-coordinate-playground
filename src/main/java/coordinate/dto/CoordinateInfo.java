@@ -8,23 +8,16 @@ import java.util.regex.Pattern;
  */
 public class CoordinateInfo {
     private static final String POINTS_STRING_FORMAT = "(\\(\\d{1,2}\\,\\d{1,2}\\)\\-){1,3}\\(\\d{1,2}\\,\\d{1,2}\\)";
-
     private static final Pattern pointsStringPattern;
+    private final String coordinateInfo;
 
     static {
         pointsStringPattern = Pattern.compile(POINTS_STRING_FORMAT);
     }
 
-    private final String coordinateInfo;
-
     public CoordinateInfo(String inputString) {
         validateFormat(inputString);
-
         coordinateInfo = inputString;
-    }
-
-    public String getValue() {
-        return coordinateInfo;
     }
 
     /**
@@ -40,5 +33,9 @@ public class CoordinateInfo {
         if(!matcher.matches()){
             throw new IllegalArgumentException("좌표 형식이 올바르지 않습니다. 좌표 예: (10,10)-(14,15)");
         }
+    }
+
+    public String getValue() {
+        return coordinateInfo;
     }
 }

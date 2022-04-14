@@ -1,6 +1,5 @@
 package coordinate.dto;
 
-import coordinate.dto.CoordinateInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-// 변두리 테스트 정리
 class CoordinateInfoTest {
 
     @Nested
@@ -24,7 +22,8 @@ class CoordinateInfoTest {
             @ParameterizedTest
             @ValueSource(strings = { "(2,10)-(9,15)", "(2,5)-(4,7)-(14,15)", "(10,10)-(14,15)-(14,15)-(14,15)" })
             void CoordinateString을_생성한다(String coordinateString) {
-                assertThat(new CoordinateInfo(coordinateString)).isInstanceOf(CoordinateInfo.class);
+                assertThat(new CoordinateInfo(coordinateString))
+                        .isInstanceOf(CoordinateInfo.class);
             }
         }
 
