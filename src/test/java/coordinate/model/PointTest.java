@@ -41,4 +41,19 @@ class PointTest {
             }
         }
     }
+
+    @Nested
+    class getDistance_메소드는{
+
+        @Test
+        void 점과_점의_거리를_반환한다() {
+            Point startPoint = new Point(10, 10);
+            Point endpoint = new Point(14, 15);
+
+            double actual = startPoint.getDistance(endpoint);
+
+            System.out.println("actual : "+actual);
+            assertThat(actual).isEqualTo(6.403, offset(0.00099));
+        }
+    }
 }

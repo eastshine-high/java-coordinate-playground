@@ -28,6 +28,29 @@ public class Point {
         if (number > MAX_RANGE || number < MIN_RANGE) throw new IllegalArgumentException(INVALID_COORDINATE_RANGE);
     }
 
+    /**
+     * 현재 점 객체와 끝점과의 거리를 계산하여 반환한다.
+     * 두 점 사이 거리는 `제곱근((A.x - B.x)^제곱 + (A.y - B.y)^제곱)`로 구할 수 있다.
+     *
+     * @param endpoint 끝점.
+     * @return 현재 점 객체와 끝점과의 거리.
+     */
+    public double getDistance(Point endpoint) {
+        return Math.sqrt(
+            square(this.getX() - endpoint.getX()) + square(this.getY() - endpoint.getY())
+        );
+    }
+
+    /**
+     * 숫자를 제곱한다.
+     *
+     * @param number 숫자
+     * @return 숫자를 제곱한 값.
+     */
+    private double square(int number) {
+        return number * number;
+    }
+
     public int getX() {
         return x;
     }
