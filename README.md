@@ -1,4 +1,11 @@
-## **프로그래밍 요구사항**
+# 좌표계산기
+
+- 프로그래밍 요구사항
+- 기능 요구 사항
+- 객체 설계
+- 기능 목록
+
+## 프로그래밍 요구사항
 
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
     - 기본적으로 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)을 원칙으로 한다.
@@ -70,8 +77,7 @@
 ```
 삼각형 넓이는 29.0
 ```
-
-## 기능 목록
+## 객체 설계
 
 ```
 ├── CoordinateApp.java
@@ -93,23 +99,6 @@
     └── ResultView.java
 ```
 
-- [x] 계산기를 실행한다 - `controller/CoordinateCalculator#run`
-    - [x] 사용자 문자열을 입력받아 '좌표정보(`dto/CoordinateInfo`)'를 반환한다. - `view/InputView#askCoordinateInfo`
-        - [x] '좌표정보(`dto/CoordinateInfo`)'는 괄호"(", ")"로 둘러쌓인 '좌표 값'으로 이뤄져 있다.
-        - [x] '좌표 값'과 '좌표 값' 사이는 `-` 문자로 구분한다.
-        - [x] '좌표 값'의 갯수는 2~4개이다.
-    - [x] '좌표 정보'를 '점(`model/Point`)으로 이뤄진 리스트'로 변환한다. - `model/PointMapper#toPointList`
-        - [x] 괄호로 둘러쌓인 `(`, `)` 좌표 값은 쉼표`,`로 x값과 y값을 구분한다.
-        - [x] x, y값의 범위는 0-24이다.
-    - [x] '점(`model/Point`)'으로 이뤄진 리스트'로 '도형(`model/Figure`)' 객체를 생성한다. - `model/FigureFactory#create`
-        - [x] 리스트의 크기가 2일 경우, 선(`model/Line`) 인스턴스를 생성한다.
-        - [x] 리스트의 크기가 3일 경우, 직사각형(`model/Rectangle`) 인스턴스를 생성한다.
-        - [x] 리스트의 크기가 4일 경우, 선(`model/Triangle`) 인스턴스를 생성한다.
-    - [x] 계산 결과를 출력한다. - `view/ResultView#showArea`
-        - [x] 도형의 면적을 계산하여 보고한다. - `model/Figure#reportArea`
-
-### 객체 설명
-
 `model`
 
 - `Figure` - 도형의 행동(메서드)을 추상화.
@@ -118,8 +107,8 @@
 - `Line` - 직선(두 개의 ‘점’으로 구성).
 - `Rectangle` - 직사각형(네 개의 ‘점’으로 구성).
 - `Triangle` - 삼각형(세 개의 ‘점’으로 구성).
-- `PointMapper` - 입력 정보를 점(`Point`)로 변환.
-- `FigureFactory` - 도형(`Figure`)의 생성을 담당.
+- `PointMapper` - 입력 정보를 점(`Point`) 객체로 변환.
+- `FigureFactory` - 도형(`Figure`)을 생성.
 
 `view`
 
@@ -133,3 +122,20 @@
 `controller`
 
 - `CoordinateCalculator` - UI에서 입력받은 좌표 정보를 계산하여 출력 UI에 반환한다.
+
+## 기능 목록
+
+- [x] 계산기를 실행한다 - `controller/CoordinateCalculator#run`
+    - [x] 사용자 문자열을 입력받아 '좌표정보(`dto/CoordinateInfo`)'를 반환한다. - `view/InputView#askCoordinateInfo`
+        - [x] '좌표정보(`dto/CoordinateInfo`)'는 괄호"(", ")"로 둘러쌓인 '좌표 값'으로 이뤄져 있다.
+        - [x] '좌표 값'과 '좌표 값' 사이는 `-` 문자로 구분한다.
+        - [x] '좌표 값'의 갯수는 2~4개이다.
+    - [x] '좌표 정보'를 '점(`model/Point`)으로 이뤄진 리스트'로 변환한다. - `model/PointMapper#toPointList`
+        - [x] 괄호로 둘러쌓인 `(`, `)` 좌표 값은 쉼표`,`로 x값과 y값을 구분한다.
+        - [x] x, y값의 범위는 0-24이다.
+    - [x] '점(`model/Point`)'으로 이뤄진 리스트'로 '도형(`model/Figure`)' 객체를 생성한다. - `model/FigureFactory#create`
+        - [x] 리스트의 크기가 2일 경우, 선(`model/Line`) 인스턴스를 생성한다.
+        - [x] 리스트의 크기가 3일 경우, 직사각형(`model/Rectangle`) 인스턴스를 생성한다.
+        - [x] 리스트의 크기가 4일 경우, 선(`model/Triangle`) 인스턴스를 생성한다.
+    - [x] 계산 결과를 출력한다. - `view/ResultView#showArea`
+        - [x] 도형의 면적을 계산하여 보고한다. - `view/Figure#reportArea`
