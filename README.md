@@ -106,16 +106,30 @@
         - [x] 리스트의 크기가 3일 경우, 직사각형(`model/Rectangle`) 인스턴스를 생성한다.
         - [x] 리스트의 크기가 4일 경우, 선(`model/Triangle`) 인스턴스를 생성한다.
     - [x] 계산 결과를 출력한다. - `view/ResultView#showArea`
-        - [x] 도형의 면적을 계산하여 보고한다. - `view/Figure#reportArea`
+        - [x] 도형의 면적을 계산하여 보고한다. - `model/Figure#reportArea`
 
-### 도메인 객체
+### 객체 설명
 
-#### `Figure` - 도형의 행동(메서드)을 추상화.
+`model`
 
-#### `AbstractFigure` - 도형의 속성을 추상화.
+- `Figure` - 도형의 행동(메서드)을 추상화.
+- `AbstractFigure` - 도형의 속성을 추상화.
+- `Point` - 점.
+- `Line` - 직선(두 개의 ‘점’으로 구성).
+- `Rectangle` - 직사각형(네 개의 ‘점’으로 구성).
+- `Triangle` - 삼각형(세 개의 ‘점’으로 구성).
+- `PointMapper` - 입력 정보를 점(`Point`)로 변환.
+- `FigureFactory` - 도형(`Figure`)의 생성을 담당.
 
-#### `Line` - 직선.
+`view`
 
-#### `Rectangle` - 직사각형.
+- `InputView` - 입력 UI를 담당.
+- `ResultView` - 출력 UI를 담당.
 
-#### `Triangle` - 삼각형.
+`dto`
+
+- `CoordinateInfo` - 사용자로 부터 입력받는 ‘좌표 정보’를 추상화.
+
+`controller`
+
+- `CoordinateCalculator` - UI에서 입력받은 좌표 정보를 계산하여 출력 UI에 반환한다.
