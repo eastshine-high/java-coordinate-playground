@@ -9,7 +9,7 @@ public class FigureFactory {
     private static final Map<Integer, Function<List<Point>, AbstractFigure>> operators = new HashMap<>();
 
     public static final int NUMBER_OF_POINTS_OF_LINE = 2;
-    public static final int NUMBER_OF_POINTS_OF_TRIANGLE = 2;
+    public static final int NUMBER_OF_POINTS_OF_TRIANGLE = 3;
     public static final int NUMBER_OF_POINTS_OF_RECTANGLE = 4;
 
     static {
