@@ -153,18 +153,18 @@
 
 좌표 계산기는 상속과 인터페이스를 활용하는 미션입니다. 하지만 상속을 정확히 어떤 목적으로 사용하는 것인지를 알지 못했기 때문에, 이를 활용하여 요구 사항을 개발하는 것에 어려움을 느꼈습니다.
 
-이 고민은 조영호님의 저서 [오브젝트](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791158391409&orderClick=LAG&Kc=) 를 통해 해소할 수 있었습니다.
+이 고민은 조영호님의 저서 [오브젝트](https://github.com/eastshine-high/til/tree/main/books/object) 를 통해 해소할 수 있었습니다.
 
 > 상속의 목적은 코드 재사용이 아니다. 상속은 타입 계층을 구조화하기 위해 사용해야 한다. 타입 계층은 객체지향 프로그래밍의 중요한 특성 중 하나인 다형성의 기반을 제공한다.
 >
 
-[타입 계층](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#%ED%83%80%EC%9E%85-%EA%B3%84%EC%B8%B5%EC%9D%98-%EC%A1%B0%EA%B1%B4) 은 오브젝트의 13장 [서브클래싱과 서브타이핑](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md) 을 통해 이해해 볼 수 있었습니다. 간단히 요약하면, 타입 계층은 [is-a 관계](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#is-a-%EA%B4%80%EA%B3%84) 와 [행동 호환성](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#%ED%96%89%EB%8F%99-%ED%98%B8%ED%99%98%EC%84%B1) 이라는 조건을 만족하는 객체들의 포함 관계입니다. 이를 연장하여 [리스코프 치환 원칙](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#%EB%A6%AC%EC%8A%A4%EC%BD%94%ED%94%84-%EC%B9%98%ED%99%98-%EC%9B%90%EC%B9%99) 또한 이해해 볼 수 있습니다. 그리고 12장 [다형성](https://github.com/eastshine-high/til/blob/main/books/object/polymorphism.md) 을 통해서는 상속의 관점에서 다형성이 구현되는 기술적인 메커니즘을 이해해 볼 수 있었습니다.
+타입 계층 은 오브젝트의 13장 [서브클래싱과 서브타이핑](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md) 을 통해 이해해 볼 수 있었습니다. 간단히 요약하면, 타입 계층은 is-a 관계와 행동 호환성이라는 조건을 만족하는 객체들의 포함 관계입니다. 이를 연장하여 리스코프 치환 원칙 또한 이해해 볼 수 있습니다. 그리고 12장 [다형성](https://github.com/eastshine-high/til/blob/main/books/object/polymorphism.md) 을 통해서는 상속의 관점에서 다형성이 구현되는 기술적인 메커니즘을 이해해 볼 수 있었습니다.
 
 이를 통해 자바의 상속과 인터페이스를 기능이 아닌 개념적 관점으로도 이해할 수 있었습니다. 인터페이스는 행동 호환성의 관점으로, 상속은 서브 타입의 관점으로 이해하고 활용해 볼 수 있었습니다.
 
 ### 모던 Java(함수형 프로그래밍, 스트림, 람다)의 사용을 숙달합니다 <a name ="modern-java"></a>
 
-[프로그래밍 요구사항](#programming-spec) 을 지키는 과정에서는 모던 Java의 사용을 숙달해 볼 수 있었습니다.
+미션의 [프로그래밍 요구사항](#programming-spec) 을 지키는 과정에서는 모던 Java의 사용을 숙달해 볼 수 있었습니다.
 
 예를 들어, 컬렉션의 값들에 대한 유효성 검사는 “indent(인덴트, 들여쓰기) depth를 2가 넘지 않도록 구현한다”는 조항으로 인해 `for` 문과 `if` 문을 동시에 사용하여 검사할 수 없었습니다. 이 때, **스트림**을 활용하여 컬렉션의 값들에 대한 유효성 검사를 해볼 수 있었습니다.
 
