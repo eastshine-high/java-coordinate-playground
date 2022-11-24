@@ -1,10 +1,68 @@
 # 좌표계산기
 
+- 회고
 - 프로그래밍 요구사항
 - 기능 요구 사항
 - 객체 설계
 - 기능 목록
-- [회고](#retrospective)
+
+## 회고 <a name ="retrospective"></a>
+
+### 순수한 Java를 이용해 요구 사항들을 구현하여 객체지향 프로그래밍을 수련합니다
+
+- [숫자야구게임 회고](https://github.com/eastshine-high/java-baseball-playground#retrospective)
+
+### 상속에 대한 올바른 이해를 통해 다형성을 사용합니다 <a name ="polymorphism"></a>
+
+좌표 계산기는 상속과 인터페이스를 활용하는 미션입니다. 하지만 객체지향 프로그래밍에서 상속의 목적과 의미가 무엇인 지는 정확히 알지 못했기 때문에, 요구 사항에 맞춰 설계하고 개발하는 것에 어려움을 느꼈습니다.
+
+이 고민은 조영호님의 저서 [오브젝트](https://github.com/eastshine-high/til/tree/main/books/object) 를 통해 해소할 수 있었습니다.
+
+> 상속의 목적은 코드 재사용이 아니다. 상속은 **타입 계층**을 구조화하기 위해 사용해야 한다. 타입 계층은 객체지향 프로그래밍의 중요한 특성 중 하나인 다형성의 기반을 제공한다.
+>
+
+책 오브젝트의 13장 [서브클래싱과 서브타이핑](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md) 을 통해서는 **타입 계층**을 이해해 볼 수 있었습니다. 타입 계층을 간단히 요약하면, 'is-a 관계와 행동 호환성이라는 조건을 만족하는 객체들의 포함 관계'입니다. 이를 통해 리스코프 치환 원칙 또한 이해해 볼 수 있습니다. 그리고 12장 [다형성](https://github.com/eastshine-high/til/blob/main/books/object/polymorphism.md) 을 통해서는 상속의 관점에서 다형성이 구현되는 기술적인 메커니즘을 이해해 볼 수 있었습니다.
+
+이를 통해 자바의 인터페이스는 [행동 호환성](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#%ED%96%89%EB%8F%99-%ED%98%B8%ED%99%98%EC%84%B1) 의 관점으로, 상속은 [서브 타입](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md#%EC%84%9C%EB%B8%8C%ED%81%B4%EB%9E%98%EC%8B%B1%EA%B3%BC-%EC%84%9C%EB%B8%8C%ED%83%80%EC%9D%B4%ED%95%91-1) 의 관점으로 이해하고 활용해 볼 수 있었습니다.
+
+### 모던 Java(함수형 프로그래밍, 스트림, 람다)의 사용을 숙달합니다 <a name ="modern-java"></a>
+
+미션의 [프로그래밍 요구사항](#programming-spec) 을 지키는 과정에서는 모던 Java의 사용을 숙달해 볼 수 있었습니다.
+
+예를 들어, 컬렉션의 값들에 대한 유효성 검사는 “indent(인덴트, 들여쓰기) depth를 2가 넘지 않도록 구현한다”는 조항으로 인해 `for` 문과 `if` 문을 동시에 사용하여 검사할 수 없었습니다. 이 때, **스트림**을 활용하여 컬렉션의 값들에 대한 유효성 검사를 해볼 수 있었습니다.
+
+```java
+private void validateRange(List<Integer> baseballs) {
+    if(baseballs.stream().anyMatch(
+            number -> number < LOWER_LIMIT || number > UPPER_LIMIT)
+    ){
+        throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
+    }
+}
+```
+
+또한 조건에 따라 다형 객체를 생성하는 팩토리에서는 “`else` 예약어와 `switch`/`case` 문을 사용하지 않는다”는 조항으로 인해 다른 방법으로 조건에 따라 객체 생성을 해야 했습니다. 이는 Map과 **함수형 인터페이스**를 활용하여 대치해 볼 수 있었습니다.
+
+```java
+public class FigureFactory {
+    private static final Map<Integer, Function<List<Point>, AbstractFigure>> operators = new HashMap<>();
+
+    public static final int NUMBER_OF_POINTS_OF_LINE = 2;
+    public static final int NUMBER_OF_POINTS_OF_TRIANGLE = 3;
+    public static final int NUMBER_OF_POINTS_OF_RECTANGLE = 4;
+
+    static {
+        operators.put(NUMBER_OF_POINTS_OF_LINE, Line::new);
+        operators.put(NUMBER_OF_POINTS_OF_TRIANGLE, Triangle::new);
+        operators.put(NUMBER_OF_POINTS_OF_RECTANGLE, Rectangle::new);
+    }
+
+    public static AbstractFigure create(List<Point> points) {
+        return operators.get(points.size()).apply(points);
+    }
+}
+```
+
 
 ## 프로그래밍 요구사항 <a name ="programming-spec"></a>
 
@@ -142,60 +200,3 @@
         - [x] 리스트의 크기가 4일 경우, 선(`model/Triangle`) 인스턴스를 생성한다.
     - [x] 계산 결과를 출력한다. - `view/ResultView#showArea`
         - [x] 도형의 면적을 계산하여 보고한다. - `view/Figure#reportArea`
-
-## 회고 <a name ="retrospective"></a>
-
-### 순수한 Java를 이용해 요구 사항들을 구현하여 객체지향 프로그래밍을 수련합니다
-
-- [숫자야구게임 회고](https://github.com/eastshine-high/java-baseball-playground#retrospective)
-
-### 상속에 대한 올바른 이해를 통해 다형성을 사용합니다 <a name ="polymorphism"></a>
-
-좌표 계산기는 상속과 인터페이스를 활용하는 미션입니다. 하지만 상속을 정확히 어떤 목적으로 사용하는 것인지를 알지 못했기 때문에, 이를 활용하여 요구 사항을 개발하는 것에 어려움을 느꼈습니다.
-
-이 고민은 조영호님의 저서 [오브젝트](https://github.com/eastshine-high/til/tree/main/books/object) 를 통해 해소할 수 있었습니다.
-
-> 상속의 목적은 코드 재사용이 아니다. 상속은 타입 계층을 구조화하기 위해 사용해야 한다. 타입 계층은 객체지향 프로그래밍의 중요한 특성 중 하나인 다형성의 기반을 제공한다.
->
-
-타입 계층 은 오브젝트의 13장 [서브클래싱과 서브타이핑](https://github.com/eastshine-high/til/blob/main/books/object/subclassing-subtyping.md) 을 통해 이해해 볼 수 있었습니다. 간단히 요약하면, 타입 계층은 is-a 관계와 행동 호환성이라는 조건을 만족하는 객체들의 포함 관계입니다. 이를 연장하여 리스코프 치환 원칙 또한 이해해 볼 수 있습니다. 그리고 12장 [다형성](https://github.com/eastshine-high/til/blob/main/books/object/polymorphism.md) 을 통해서는 상속의 관점에서 다형성이 구현되는 기술적인 메커니즘을 이해해 볼 수 있었습니다.
-
-이를 통해 자바의 상속과 인터페이스를 기능이 아닌 개념적 관점으로도 이해할 수 있었습니다. 인터페이스는 행동 호환성의 관점으로, 상속은 서브 타입의 관점으로 이해하고 활용해 볼 수 있었습니다.
-
-### 모던 Java(함수형 프로그래밍, 스트림, 람다)의 사용을 숙달합니다 <a name ="modern-java"></a>
-
-미션의 [프로그래밍 요구사항](#programming-spec) 을 지키는 과정에서는 모던 Java의 사용을 숙달해 볼 수 있었습니다.
-
-예를 들어, 컬렉션의 값들에 대한 유효성 검사는 “indent(인덴트, 들여쓰기) depth를 2가 넘지 않도록 구현한다”는 조항으로 인해 `for` 문과 `if` 문을 동시에 사용하여 검사할 수 없었습니다. 이 때, **스트림**을 활용하여 컬렉션의 값들에 대한 유효성 검사를 해볼 수 있었습니다.
-
-```java
-private void validateRange(List<Integer> baseballs) {
-    if(baseballs.stream().anyMatch(
-            number -> number < LOWER_LIMIT || number > UPPER_LIMIT)
-    ){
-        throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
-    }
-}
-```
-
-또한 조건에 따라 다형 객체를 생성하는 팩토리에서는 “`else` 예약어와 `switch`/`case` 문을 사용하지 않는다”는 조항으로 인해 다른 방법으로 조건에 따라 객체 생성을 해야 했습니다. 이는 Map과 **함수형 인터페이스**를 활용하여 대치해 볼 수 있었습니다.
-
-```java
-public class FigureFactory {
-    private static final Map<Integer, Function<List<Point>, AbstractFigure>> operators = new HashMap<>();
-
-    public static final int NUMBER_OF_POINTS_OF_LINE = 2;
-    public static final int NUMBER_OF_POINTS_OF_TRIANGLE = 3;
-    public static final int NUMBER_OF_POINTS_OF_RECTANGLE = 4;
-
-    static {
-        operators.put(NUMBER_OF_POINTS_OF_LINE, Line::new);
-        operators.put(NUMBER_OF_POINTS_OF_TRIANGLE, Triangle::new);
-        operators.put(NUMBER_OF_POINTS_OF_RECTANGLE, Rectangle::new);
-    }
-
-    public static AbstractFigure create(List<Point> points) {
-        return operators.get(points.size()).apply(points);
-    }
-}
-```
