@@ -13,7 +13,7 @@ public class CoordinateContext {
 
     private CoordinateContext() { }
 
-    public static synchronized CoordinateCalculator getCoordinateCalculator() {
+    public static CoordinateCalculator getCoordinateCalculator() {
         if (coordinateCalculator == null) {
             coordinateCalculator = new CoordinateCalculator(
                     new InputView(),
